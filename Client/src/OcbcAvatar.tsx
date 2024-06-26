@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Configuration, NewSessionData, StreamingAvatarApi } from '@heygen/streaming-avatar';
 import './App.css';
+import AvatarDisplay from './AvatarDisplay';
+import Controls from './Controls';
 
 
 function App() {
@@ -177,42 +179,19 @@ function App() {
   // };
 
 
-  return (
-    <div className="HeyGenStreamingAvatar">
-      <header className="App-header">
-
-        <p>
-          {debug}
-        </p>
-        {/* <div className="LabelPair">
-          <label>Avatar ID </label>
-          <input className="InputField2" placeholder='Avatar ID' value={avatarId} onChange={(v) => setAvatarId(v.target.value)} />
-        </div>
-        <div className="LabelPair">
-          <label>Voice ID</label>
-          <input className="InputField2" placeholder='Voice ID' value={voiceId} onChange={(v) => setVoiceId(v.target.value)} />
-        </div> */}
-
-        <div className="MediaPlayer">
-          <video playsInline autoPlay ref={mediaStream}></video>
-        </div>
-        <div className="Actions">
-          <input className="InputField" placeholder='Type something for the avatar to say' value={text} onChange={(v) => setText(v.target.value)} />
-        </div>
-
-        <div className='Actions'>
-          <button onClick={handleSpeak}>Speak</button>
-          <button onClick={grab}>Start</button>
-          <button onClick={stop}>Stop</button>
-          <button onClick={() => speak("You've selected travel")}>Hello</button>
-        </div>
-        <div className="Actions">
-          {/* <input className="InputField" placeholder='Send text to ChatGPT' value={chatGPTText} onChange={(v) => setChatGPTText(v.target.value)} /> */}
-          {/* <button onClick={handleChatGPT}>Talk to ChatGPT</button> */}
-        </div>
-      </header>
-    </div>
-  );
+return (
+  <div className="HeyGenStreamingAvatar">
+    <header className="App-header">
+      <AvatarDisplay stream={stream} setDebug={setDebug} />
+      <Controls
+        handleSpeak={handleSpeak}
+        grab={grab}
+        stop={stop}
+        speak={speak}
+      />
+    </header>
+  </div>
+);
 }
 
 export default App;
